@@ -1,0 +1,27 @@
+kind = "slides"
+previewPath = "/edubot-ppt/"
+title = "EduBot — AI Student Support Chatbot"
+version = "1.0.0"
+id = "artifacts/edubot-ppt"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/edubot-ppt/" ]
+localPort = 20773
+
+[services.development]
+run = "pnpm --filter @workspace/edubot-ppt run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/edubot-ppt", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/edubot-ppt/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20773"
+BASE_PATH = "/edubot-ppt/"

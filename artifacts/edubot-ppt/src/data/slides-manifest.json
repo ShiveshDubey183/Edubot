@@ -1,0 +1,58 @@
+[
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567801",
+    "position": 1,
+    "filepath": "src/pages/slides/Slide1Title.tsx",
+    "title": "EduBot — Title",
+    "description": "Title slide with project name and presenter",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567802",
+    "position": 2,
+    "filepath": "src/pages/slides/Slide2Overview.tsx",
+    "title": "Project Overview",
+    "description": "What EduBot is and what topics it covers",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567803",
+    "position": 3,
+    "filepath": "src/pages/slides/Slide3Problem.tsx",
+    "title": "Problem Statement",
+    "description": "The problem EduBot solves for college students",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567804",
+    "position": 4,
+    "filepath": "src/pages/slides/Slide4Features.tsx",
+    "title": "Key Features",
+    "description": "Five core features of EduBot",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567805",
+    "position": 5,
+    "filepath": "src/pages/slides/Slide5TechStack.tsx",
+    "title": "Tech Stack",
+    "description": "Technologies used to build EduBot",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567806",
+    "position": 6,
+    "filepath": "src/pages/slides/Slide6HowItWorks.tsx",
+    "title": "How EduBot Works",
+    "description": "Step-by-step flow of how EduBot processes a student query",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567807",
+    "position": 7,
+    "filepath": "src/pages/slides/Slide7ThankYou.tsx",
+    "title": "Thank You",
+    "description": "Closing slide by Shivesh Dubey",
+    "speakerNotes": ""
+  }
+]

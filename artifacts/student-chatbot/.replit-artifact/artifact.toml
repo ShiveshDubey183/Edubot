@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "AI Student Support Chatbot"
+version = "1.0.0"
+id = "artifacts/student-chatbot"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23699
+
+[services.development]
+run = "pnpm --filter @workspace/student-chatbot run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/student-chatbot", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/student-chatbot/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23699"
+BASE_PATH = "/"

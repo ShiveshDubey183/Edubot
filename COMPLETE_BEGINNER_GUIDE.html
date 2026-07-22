@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduBot - Complete Beginner Setup Guide</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    line-height: 1.7;
+    padding: 0;
+  }
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 60px 40px;
+    text-align: center;
+    border-bottom: 3px solid #58a6ff;
+  }
+  .hero h1 {
+    font-size: 2.5em;
+    color: #58a6ff;
+    margin-bottom: 10px;
+  }
+  .hero p {
+    font-size: 1.2em;
+    color: #8b949e;
+  }
+  .container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+  .progress-bar {
+    background: #21262d;
+    border-radius: 12px;
+    padding: 20px 25px;
+    margin-bottom: 40px;
+    border: 1px solid #30363d;
+  }
+  .progress-bar h3 {
+    color: #58a6ff;
+    margin-bottom: 12px;
+    font-size: 1.1em;
+  }
+  .progress-steps {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .progress-step {
+    background: #30363d;
+    color: #8b949e;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+  }
+  .progress-step.active {
+    background: #238636;
+    color: #fff;
+  }
+  .step {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .step:hover {
+    border-color: #58a6ff;
+  }
+  .step-header {
+    background: #21262d;
+    padding: 20px 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .step-number {
+    background: #58a6ff;
+    color: #0d1117;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2em;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #f0f6fc;
+  }
+  .step-body {
+    padding: 25px;
+  }
+  .step-body p {
+    margin-bottom: 15px;
+    color: #c9d1d9;
+  }
+  .click-path {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 12px 0;
+    font-size: 0.95em;
+  }
+  .click-path .arrow {
+    color: #58a6ff;
+    font-weight: bold;
+    margin: 0 6px;
+  }
+  code, .code-block {
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  }
+  code {
+    background: #21262d;
+    color: #79c0ff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .code-block {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin: 15px 0;
+    overflow-x: auto;
+    position: relative;
+  }
+  .code-block::before {
+    content: '💻 Copy this:';
+    display: block;
+    color: #58a6ff;
+    font-size: 0.8em;
+    font-family: 'Segoe UI', sans-serif;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .code-block code {
+    background: none;
+    padding: 0;
+    color: #e6edf3;
+    font-size: 0.95em;
+    line-height: 1.8;
+    display: block;
+    white-space: pre;
+  }
+  .code-block.no-label::before {
+    display: none;
+  }
+  .warning {
+    background: #2d1f00;
+    border: 1px solid #d29922;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .warning-icon {
+    font-size: 1.3em;
+    flex-shrink: 0;
+  }
+  .warning p {
+    color: #e3b341;
+    margin: 0;
+  }
+  .success {
+    background: #0d2818;
+    border: 1px solid #238636;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 15px 0;
+  }
+  .success p {
+    color: #3fb950;
+    margin: 0;
+  }
+  .info {
+    background: #0c2d6b;
+    border: 1px solid #1f6feb;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 15px 0;
+  }
+  .info p {
+    color: #79c0ff;
+    margin: 0;
+  }
+  .you-will-see {
+    background: #1c2128;
+    border-left: 4px solid #3fb950;
+    padding: 12px 18px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .you-will-see .label {
+    color: #3fb950;
+    font-weight: 700;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .you-will-see code {
+    display: block;
+    margin-top: 6px;
+    color: #8b949e;
+  }
+  a {
+    color: #58a6ff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  .btn-link {
+    display: inline-block;
+    background: #238636;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    margin: 8px 4px;
+    text-decoration: none;
+  }
+  .btn-link:hover {
+    background: #2ea043;
+    text-decoration: none;
+  }
+  .btn-blue {
+    background: #1f6feb;
+  }
+  .btn-blue:hover {
+    background: #388bfd;
+  }
+  .screenshot-desc {
+    background: #21262d;
+    border: 1px dashed #30363d;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 12px 0;
+    font-style: italic;
+    color: #8b949e;
+  }
+  .screenshot-desc::before {
+    content: '👀 What you should see: ';
+    font-style: normal;
+    font-weight: 700;
+    color: #d2a8ff;
+  }
+  ol.numbered-steps {
+    padding-left: 20px;
+    margin: 12px 0;
+  }
+  ol.numbered-steps li {
+    margin-bottom: 10px;
+    color: #c9d1d9;
+  }
+  .time-estimate {
+    color: #8b949e;
+    font-size: 0.85em;
+    font-weight: normal;
+  }
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #484f58;
+    border-top: 1px solid #21262d;
+    margin-top: 40px;
+  }
+  h2.section-heading {
+    color: #58a6ff;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 50px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #21262d;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🤖 EduBot — Complete Beginner Setup</h1>
+  <p>From "I have a zip file" to "My chatbot is running!" — every single click explained.</p>
+</div>
+
+<div class="container">
+
+<div class="progress-bar">
+  <h3>📋 Your Setup Checklist (8 Steps, ~30 minutes total)</h3>
+  <div class="progress-steps">
+    <span class="progress-step active">1. Install Node.js</span>
+    <span class="progress-step active">2. Extract Zip</span>
+    <span class="progress-step active">3. Open in VS Code</span>
+    <span class="progress-step active">4. Open Terminal</span>
+    <span class="progress-step active">5. Setup pnpm</span>
+    <span class="progress-step active">6. Configure Project</span>
+    <span class="progress-step active">7. Get API Keys</span>
+    <span class="progress-step active">8. Run It!</span>
+  </div>
+</div>
+
+<!-- ============================== STEP 1 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">1</div>
+    <div class="step-title">Install Node.js <span class="time-estimate">(~3 minutes)</span></div>
+  </div>
+  <div class="step-body">
+    <p>Node.js is the engine that runs JavaScript outside a browser. Your EduBot needs it.</p>
+
+    <ol class="numbered-steps">
+      <li>
+        Open this link in your browser:
+        <br><br>
+        <a href="https://nodejs.org/en/download" class="btn-link" target="_blank">🌐 Go to nodejs.org/download</a>
+      </li>
+      <li>
+        On the page, click the big green button that says <strong>"LTS"</strong> (Long Term Support). It will download a file like <code>node-v22.x.x-x64.msi</code>
+      </li>
+      <li>
+        Go to your <strong>Downloads</strong> folder and <strong>double-click</strong> the downloaded <code>.msi</code> file
+      </li>
+      <li>
+        The installer will open. Click through these screens:
+        <div class="click-path">
+          <strong>Next</strong> <span class="arrow">→</span>
+          ✅ <strong>I accept</strong> <span class="arrow">→</span>
+          <strong>Next</strong> <span class="arrow">→</span>
+          <strong>Next</strong> <span class="arrow">→</span>
+          ✅ <strong>Automatically install tools</strong> (check this!) <span class="arrow">→</span>
+          <strong>Next</strong> <span class="arrow">→</span>
+          <strong>Install</strong> <span class="arrow">→</span>
+          <strong>Yes</strong> (Windows permission popup) <span class="arrow">→</span>
+          <strong>Finish</strong>
+        </div>
+      </li>
+      <li>
+        <strong>IMPORTANT:</strong> After installation, <strong>close ALL</strong> open terminals, CMD, PowerShell, and VS Code windows. This is so they can detect the new Node.js installation.
+      </li>
+    </ol>
+
+    <div class="success">
+      <p>✅ <strong>Verify it worked:</strong> Press <code>Windows Key + R</code>, type <code>cmd</code>, press Enter. Then type <code>node -v</code> — you should see something like <code>v22.15.0</code>. If you see that, Node.js is installed!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 2 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">2</div>
+    <div class="step-title">Extract the Zip File <span class="time-estimate">(~1 minute)</span></div>
+  </div>
+  <div class="step-body">
+    <p>The zip file I gave you contains all the project code. You need to extract (unzip) it first.</p>
+
+    <ol class="numbered-steps">
+      <li>
+        Find the file <code>EduBot-Fixed-Clean.zip</code> in your <strong>Downloads</strong> folder
+      </li>
+      <li>
+        <strong>Right-click</strong> on <code>EduBot-Fixed-Clean.zip</code>
+      </li>
+      <li>
+        Click <strong>"Extract All..."</strong>
+      </li>
+      <li>
+        A window pops up. Leave the default path and click <strong>"Extract"</strong>
+      </li>
+      <li>
+        A folder will open with all your project files
+      </li>
+    </ol>
+
+    <div class="warning">
+      <span class="warning-icon">⚠️</span>
+      <p><strong>Don't skip this step!</strong> You CANNOT open a zip file directly in VS Code and run it. You MUST extract it first. If you see files like <code>pnpm-workspace.yaml</code> and folders like <code>artifacts</code> and <code>lib</code>, you're looking at the extracted folder — that's correct.</p>
+    </div>
+
+    <div class="screenshot-desc">
+      A folder window showing files like: <code>.env.example</code>, <code>docker-compose.yml</code>, <code>package.json</code>, <code>pnpm-workspace.yaml</code>, <code>pnpm-workspace.local.yaml</code>, <code>README.md</code>, and folders: <code>artifacts</code>, <code>lib</code>, <code>scripts</code>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 3 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">3</div>
+    <div class="step-title">Open the Folder in VS Code <span class="time-estimate">(~30 seconds)</span></div>
+  </div>
+  <div class="step-body">
+    <ol class="numbered-steps">
+      <li>
+        Open <strong>VS Code</strong>
+        <br><small>(Press Windows Key, type "vscode" or "Visual Studio Code", click it)</small>
+      </li>
+      <li>
+        In VS Code, click the menu: <strong>File</strong> (top-left corner)
+      </li>
+      <li>
+        Click <strong>"Open Folder..."</strong>
+        <br><small>(Or press <code>Ctrl + K</code> then <code>Ctrl + O</code>)</small>
+      </li>
+      <li>
+        Navigate to your extracted folder and <strong>select the main folder</strong> (the one containing <code>package.json</code>)
+      </li>
+      <li>
+        Click <strong>"Select Folder"</strong>
+      </li>
+      <li>
+        If VS Code asks <strong>"Do you trust the authors of the files in this folder?"</strong> → Click <strong>"Yes, I trust the authors"</strong>
+      </li>
+    </ol>
+
+    <div class="success">
+      <p>✅ You should now see a file explorer on the LEFT side of VS Code showing all the project files and folders.</p>
+    </div>
+
+    <div class="warning">
+      <span class="warning-icon">⚠️</span>
+      <p><strong>Wrong folder?</strong> If you opened a subfolder like <code>artifacts/api-server</code> instead of the root, things won't work. Make sure you can see <code>package.json</code>, <code>pnpm-workspace.yaml</code>, and the <code>artifacts</code> folder in the left panel.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 4 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">4</div>
+    <div class="step-title">Open the Terminal Inside VS Code <span class="time-estimate">(~10 seconds)</span></div>
+  </div>
+  <div class="step-body">
+    <p>The terminal is where you type commands. VS Code has a built-in terminal at the bottom.</p>
+
+    <ol class="numbered-steps">
+      <li>
+        Press <code>Ctrl</code> + <code>`</code> (the backtick key — it's above the Tab key, next to the 1 key)
+      </li>
+      <li>
+        <strong>OR:</strong> Click menu → <strong>View</strong> → <strong>Terminal</strong>
+      </li>
+    </ol>
+
+    <div class="screenshot-desc">
+      A dark panel at the bottom of VS Code showing a terminal with a blinking cursor. It might say something like <code>PS C:\Users\YourName\...\EduBot-Fixed-Clean></code>
+    </div>
+
+    <div class="info">
+      <p>💡 <strong>From now on, ALL commands below will be typed into THIS terminal.</strong> You don't need to open a separate CMD or PowerShell window.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 5 ============================== -->
+<h2 class="section-heading">🔧 Setting Up the Project</h2>
+
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">5</div>
+    <div class="step-title">Install pnpm (the Package Manager) <span class="time-estimate">(~1 minute)</span></div>
+  </div>
+  <div class="step-body">
+    <p><code>pnpm</code> is a tool that downloads all the libraries your project needs. Think of it like an app store for code.</p>
+
+    <p>Type this command in the VS Code terminal and press <strong>Enter</strong>:</p>
+
+    <div class="code-block">
+      <code>corepack enable</code>
+    </div>
+
+    <div class="you-will-see">
+      <div class="label">✅ Expected Output</div>
+      <code>Nothing visible, or a short message. No errors = success.</code>
+    </div>
+
+    <p>Then type this:</p>
+
+    <div class="code-block">
+      <code>corepack prepare pnpm@latest --activate</code>
+    </div>
+
+    <div class="you-will-see">
+      <div class="label">✅ Expected Output</div>
+      <code>Preparing pnpm@latest... done<br>Activating pnpm@10.x.x... done</code>
+    </div>
+
+    <p>Verify it worked:</p>
+
+    <div class="code-block">
+      <code>pnpm -v</code>
+    </div>
+
+    <div class="you-will-see">
+      <div class="label">✅ Expected Output</div>
+      <code>10.12.1 (or similar number — any version is fine!)</code>
+    </div>
+
+    <div class="warning">
+      <span class="warning-icon">⚠️</span>
+      <p>If <code>corepack enable</code> gives an error saying "not recognized", try this instead: <code>npm install -g pnpm</code></p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 6 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">6</div>
+    <div class="step-title">Switch to Windows-Friendly Config <span class="time-estimate">(~10 seconds)</span></div>
+  </div>
+  <div class="step-body">
+    <p>The original project was built on Replit (Linux). Some settings block Windows. We need to swap the config file.</p>
+
+    <p>Type this in the terminal:</p>
+
+    <div class="code-block">
+      <code>copy pnpm-workspace.local.yaml pnpm-workspace.yaml</code>
+    </div>
+
+    <p>If it asks <strong>"Overwrite?"</strong> → type <code>Y</code> and press Enter.</p>
+
+    <div class="you-will-see">
+      <div class="label">✅ Expected Output</div>
+      <code>        1 file(s) copied.</code>
+    </div>
+
+    <div class="info">
+      <p>💡 <strong>What this does:</strong> The original config removes Windows versions of tools like esbuild to save space on Replit. This local version keeps them so everything works on your Windows PC.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 7 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">7</div>
+    <div class="step-title">Create Your .env File (Settings) <span class="time-estimate">(~1 minute)</span></div>
+  </div>
+  <div class="step-body">
+    <p>The <code>.env</code> file stores your project's secret settings (API keys, database URL, etc.)</p>
+
+    <p><strong>Step A:</strong> Create the file by copying the template. Type this in terminal:</p>
+
+    <div class="code-block">
+      <code>copy .env.example .env</code>
+    </div>
+
+    <p><strong>Step B:</strong> Now open the <code>.env</code> file in VS Code:</p>
+
+    <div class="click-path">
+      Look at the <strong>left panel</strong> (Explorer) <span class="arrow">→</span>
+      Find <code>.env</code> <span class="arrow">→</span>
+      <strong>Click it</strong> to open
+    </div>
+
+    <p>You'll see this content:</p>
+
+    <div class="code-block no-label">
+      <code>PORT=8080
+NODE_ENV=development
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/edubot
+GEMINI_API_KEY=</code>
+    </div>
+
+    <p><strong>Leave it as-is for now</strong> — we'll fill in the API key in the next step.</p>
+  </div>
+</div>
+
+<!-- ============================== STEP 8 ============================== -->
+<h2 class="section-heading">🔑 Getting Your Free API Keys</h2>
+
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">8</div>
+    <div class="step-title">Get a Free Gemini API Key <span class="time-estimate">(~3 minutes)</span></div>
+  </div>
+  <div class="step-body">
+    <p>Your chatbot uses Google's Gemini AI to generate responses. You need a free API key.</p>
+
+    <ol class="numbered-steps">
+      <li>
+        Open this link in your browser:
+        <br><br>
+        <a href="https://aistudio.google.com/app/apikey" class="btn-link btn-blue" target="_blank">🔑 Go to Google AI Studio</a>
+      </li>
+      <li>
+        Sign in with your <strong>Google account</strong> (Gmail)
+      </li>
+      <li>
+        Click <strong>"Create API Key"</strong>
+      </li>
+      <li>
+        Choose <strong>"Create API key in new project"</strong> (or any existing project)
+      </li>
+      <li>
+        Your key will appear — it starts with <code>AIza...</code>
+      </li>
+      <li>
+        Click the <strong>copy button</strong> next to the key
+      </li>
+    </ol>
+
+    <p><strong>Now paste it into your .env file:</strong></p>
+
+    <p>Go back to VS Code → click the <code>.env</code> file → find the last line that says <code>GEMINI_API_KEY=</code> and paste your key after the <code>=</code> sign:</p>
+
+    <div class="code-block no-label">
+      <code>GEMINI_API_KEY=AIzaSyB...........................(your long key here)</code>
+    </div>
+
+    <p>Press <code>Ctrl + S</code> to save the file.</p>
+
+    <div class="warning">
+      <span class="warning-icon">⚠️</span>
+      <p><strong>NEVER share your API key with anyone!</strong> Don't post it online, don't send it in screenshots. It's like a password.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 9 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">9</div>
+    <div class="step-title">Get a Free Database (Neon) <span class="time-estimate">(~5 minutes)</span></div>
+  </div>
+  <div class="step-body">
+    <p>Your chatbot saves conversations in a database. Since you don't have Docker, we'll use <strong>Neon</strong> — a free cloud database (just like what Replit uses).</p>
+
+    <ol class="numbered-steps">
+      <li>
+        Open this link:
+        <br><br>
+        <a href="https://neon.tech" class="btn-link btn-blue" target="_blank">🌐 Go to neon.tech</a>
+      </li>
+      <li>
+        Click <strong>"Sign Up"</strong> (top right) → Sign up with your <strong>Google/GitHub account</strong>
+      </li>
+      <li>
+        After signing in, click <strong>"Create Project"</strong>
+      </li>
+      <li>
+        Fill in:
+        <ul style="margin-top: 8px; padding-left: 20px;">
+          <li><strong>Project name:</strong> <code>edubot</code></li>
+          <li><strong>Region:</strong> Choose the one closest to you (e.g., <code>Asia Southeast</code> for India)</li>
+          <li>Leave everything else as default</li>
+        </ul>
+      </li>
+      <li>
+        Click <strong>"Create Project"</strong>
+      </li>
+      <li>
+        On the next screen, you'll see a <strong>connection string</strong>. It looks like:
+        <div class="code-block no-label">
+          <code>postgresql://neondb_owner:xxxxx@ep-xyz.ap-southeast-1.aws.neon.tech/neondb?sslmode=require</code>
+        </div>
+      </li>
+      <li>
+        Click the <strong>copy button</strong> next to it
+      </li>
+    </ol>
+
+    <p><strong>Now paste it into your .env file:</strong></p>
+
+    <p>Go back to VS Code → open <code>.env</code> → find the line <code>DATABASE_URL=</code> → replace everything after <code>=</code> with your Neon connection string:</p>
+
+    <div class="code-block no-label">
+      <code>DATABASE_URL=postgresql://neondb_owner:xxxxx@ep-xyz.ap-southeast-1.aws.neon.tech/neondb?sslmode=require</code>
+    </div>
+
+    <p>Press <code>Ctrl + S</code> to save.</p>
+
+    <div class="success">
+      <p>✅ <strong>That's it!</strong> Neon is free forever for personal projects. No credit card needed. You now have a cloud database just like Replit had.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 10 ============================== -->
+<h2 class="section-heading">📦 Installing & Building</h2>
+
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">10</div>
+    <div class="step-title">Install All Dependencies <span class="time-estimate">(~3-5 minutes)</span></div>
+  </div>
+  <div class="step-body">
+    <p>This downloads all the code libraries your project needs. Type this in the terminal:</p>
+
+    <div class="code-block">
+      <code>pnpm install</code>
+    </div>
+
+    <div class="screenshot-desc">
+      You'll see a LOT of text scrolling by — package names downloading. This is normal. Wait for it to finish. It might take 3-5 minutes on first run.
+    </div>
+
+    <div class="you-will-see">
+      <div class="label">✅ Expected Output (at the end)</div>
+      <code>Done in 2m 34s<br>Packages: +847<br>...</code>
+    </div>
+
+    <div class="warning">
+      <span class="warning-icon">⚠️</span>
+      <p><strong>If you see errors:</strong></p>
+      <p>• <code>"Use pnpm instead"</code> → You accidentally typed <code>npm install</code>. Use <code>pnpm install</code> instead.</p>
+      <p>• <code>"esbuild binary not found"</code> → You forgot Step 6 (copy pnpm-workspace.local.yaml). Go back and do it.</p>
+      <p>• <code>"'pnpm' is not recognized"</code> → Go back to Step 5 and install pnpm.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 11 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">11</div>
+    <div class="step-title">Generate API Types <span class="time-estimate">(~30 seconds)</span></div>
+  </div>
+  <div class="step-body">
+    <p>This creates TypeScript type definitions for the API. Copy-paste each command one by one:</p>
+
+    <div class="code-block">
+      <code>pnpm --filter @workspace/api-spec run codegen</code>
+    </div>
+
+    <div class="you-will-see">
+      <div class="label">✅ Expected Output</div>
+      <code>Done in 5s (or similar)</code>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 12 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">12</div>
+    <div class="step-title">Set Up the Database <span class="time-estimate">(~30 seconds)</span></div>
+  </div>
+  <div class="step-body">
+    <p>This creates the tables (conversations, messages) in your Neon database:</p>
+
+    <div class="code-block">
+      <code>pnpm --filter @workspace/db run push</code>
+    </div>
+
+    <div class="you-will-see">
+      <div class="label">✅ Expected Output</div>
+      <code>✓ Your database is now in sync with your schema<br>[✓] Done in 3s</code>
+    </div>
+
+    <div class="warning">
+      <span class="warning-icon">⚠️</span>
+      <p>If you see <code>ECONNREFUSED</code> or connection errors → Your <code>DATABASE_URL</code> in the <code>.env</code> file is wrong. Go back to Step 9 and re-copy the Neon connection string.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 13 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">13</div>
+    <div class="step-title">Build the Project <span class="time-estimate">(~1 minute)</span></div>
+  </div>
+  <div class="step-body">
+    <p>This compiles all the TypeScript code into JavaScript that Node.js can run:</p>
+
+    <div class="code-block">
+      <code>pnpm run build</code>
+    </div>
+
+    <div class="screenshot-desc">
+      Lots of text. It might show some warnings (yellow text) — that's OK. As long as it doesn't show red errors, you're fine.
+    </div>
+
+    <div class="you-will-see">
+      <div class="label">✅ Expected Output</div>
+      <code>Done in 45s (or similar — it compiles all packages)</code>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 14 ============================== -->
+<h2 class="section-heading">🚀 Running Your EduBot!</h2>
+
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">14</div>
+    <div class="step-title">Start the Backend Server <span class="time-estimate">(~10 seconds)</span></div>
+  </div>
+  <div class="step-body">
+    <p>The backend handles all the AI and database logic. Type this in the terminal:</p>
+
+    <div class="code-block">
+      <code>pnpm --filter @workspace/api-server run dev</code>
+    </div>
+
+    <div class="you-will-see">
+      <div class="label">✅ Expected Output</div>
+      <code>[INFO] Server listening { port: 8080 }</code>
+    </div>
+
+    <div class="success">
+      <p>✅ <strong>Backend is running!</strong> Don't close this terminal — leave it running.</p>
+    </div>
+
+    <div class="info">
+      <p>💡 If you see <code>Server listening { port: 8080 }</code>, the backend is alive! You can test it by opening <a href="http://localhost:8080/api/healthz" target="_blank">http://localhost:8080/api/healthz</a> in your browser — you should see <code>{"status":"ok"}</code></p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 15 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">15</div>
+    <div class="step-title">Open a Second Terminal & Start Frontend <span class="time-estimate">(~10 seconds)</span></div>
+  </div>
+  <div class="step-body">
+    <p>You need a SECOND terminal for the frontend (the backend is still running in the first one).</p>
+
+    <p><strong>To create a second terminal:</strong></p>
+
+    <div class="click-path">
+      Look at the terminal panel at the bottom <span class="arrow">→</span>
+      Find the <strong>+</strong> icon (top-right of terminal panel) <span class="arrow">→</span>
+      Click the <strong>+</strong> to create a new terminal
+    </div>
+
+    <div class="screenshot-desc">
+      You'll see two terminal tabs at the bottom — "bash" and "bash (2)" or similar. Click on the new one (the second tab).
+    </div>
+
+    <p>In this <strong>new terminal</strong>, type:</p>
+
+    <div class="code-block">
+      <code>pnpm --filter @workspace/student-chatbot run dev</code>
+    </div>
+
+    <div class="you-will-see">
+      <div class="label">✅ Expected Output</div>
+      <code>  VITE v7.x.x  ready in 2000 ms<br><br>  ➜  Local:   http://localhost:5173/<br>  ➜  Network: http://0.0.0.0:5173/</code>
+    </div>
+
+    <div class="success">
+      <p>🎉 <strong>YOUR EDUBOT IS RUNNING!</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== STEP 16 ============================== -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">16</div>
+    <div class="step-title">Open EduBot in Your Browser! 🎉</div>
+  </div>
+  <div class="step-body">
+    <p>Hold <code>Ctrl</code> and click this link in the terminal output:</p>
+
+    <div class="code-block no-label">
+      <code>http://localhost:5173/</code>
+    </div>
+
+    <p><strong>OR</strong> manually open your browser and type <code>http://localhost:5173</code> in the address bar.</p>
+
+    <div class="success">
+      <p>🎉🎉🎉 <strong>CONGRATULATIONS! Your EduBot chatbot should now be visible in your browser!</strong> 🎉🎉🎉</p>
+      <p style="margin-top: 10px;">Try typing a message like "Tell me about college admissions in India" and watch your AI chatbot respond!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== TROUBLESHOOTING ============================== -->
+<h2 class="section-heading">🔧 Something Went Wrong?</h2>
+
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">?</div>
+    <div class="step-title">Troubleshooting — Common Problems</div>
+  </div>
+  <div class="step-body">
+
+    <div class="warning">
+      <span class="warning-icon">❌</span>
+      <p><strong>Problem:</strong> <code>"'pnpm' is not recognized as an internal or external command"</code><br>
+      <strong>Fix:</strong> Go back to Step 5. Run <code>npm install -g pnpm</code> instead.</p>
+    </div>
+
+    <div class="warning">
+      <span class="warning-icon">❌</span>
+      <p><strong>Problem:</strong> <code>"Use pnpm instead"</code> when running install<br>
+      <strong>Fix:</strong> You typed <code>npm install</code>. Use <code>pnpm install</code> instead.</p>
+    </div>
+
+    <div class="warning">
+      <span class="warning-icon">❌</span>
+      <p><strong>Problem:</strong> <code>"esbuild: Failed to find package @esbuild/win32-x64"</code><br>
+      <strong>Fix:</strong> Go back to Step 6. Run <code>copy pnpm-workspace.local.yaml pnpm-workspace.yaml</code> then <code>pnpm install</code> again.</p>
+    </div>
+
+    <div class="warning">
+      <span class="warning-icon">❌</span>
+      <p><strong>Problem:</strong> <code>"DATABASE_URL must be set"</code> or <code>ECONNREFUSED</code><br>
+      <strong>Fix:</strong> Check your <code>.env</code> file. The <code>DATABASE_URL</code> line should have your Neon connection string (Step 9). Make sure it starts with <code>postgresql://</code>.</p>
+    </div>
+
+    <div class="warning">
+      <span class="warning-icon">❌</span>
+      <p><strong>Problem:</strong> <code>"'export' is not recognized"</code><br>
+      <strong>Fix:</strong> You're using old code. Make sure you downloaded the fixed zip I gave you.</p>
+    </div>
+
+    <div class="warning">
+      <span class="warning-icon">❌</span>
+      <p><strong>Problem:</strong> Frontend shows blank white page<br>
+      <strong>Fix:</strong> Open browser DevTools (<code>F12</code>) → Console tab → check for red errors. Most likely the backend isn't running or the API URL is wrong.</p>
+    </div>
+
+    <div class="warning">
+      <span class="warning-icon">❌</span>
+      <p><strong>Problem:</strong> Chatbot doesn't respond / shows error when sending messages<br>
+      <strong>Fix:</strong> Check your <code>GEMINI_API_KEY</code> in <code>.env</code>. Make sure it starts with <code>AIza</code> and has no extra spaces.</p>
+    </div>
+
+    <div class="info">
+      <p>💡 <strong>Still stuck?</strong> Copy the EXACT error message from your terminal and send it to me — I'll tell you exactly what to fix!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== DAILY USE ============================== -->
+<h2 class="section-heading">📝 For Next Time (How to Start EduBot Daily)</h2>
+
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">∞</div>
+    <div class="step-title">Starting EduBot on Any Future Day</div>
+  </div>
+  <div class="step-body">
+    <p>You only need to do the setup ONCE. After that, every time you want to run EduBot:</p>
+
+    <ol class="numbered-steps">
+      <li>Open VS Code → Open your project folder</li>
+      <li>Open terminal (<code>Ctrl + `</code>)</li>
+      <li>Start backend:
+        <div class="code-block">
+          <code>pnpm --filter @workspace/api-server run dev</code>
+        </div>
+      </li>
+      <li>Click <strong>+</strong> to open second terminal</li>
+      <li>Start frontend:
+        <div class="code-block">
+          <code>pnpm --filter @workspace/student-chatbot run dev</code>
+        </div>
+      </li>
+      <li>Open <code>http://localhost:5173</code> in browser</li>
+    </ol>
+
+    <div class="success">
+      <p>✅ That's it! Just 2 commands every time. No need to re-install anything.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Made with ❤️ for EduBot | You've got this! 🚀</p>
+</div>
+
+</div>
+</body>
+</html>
