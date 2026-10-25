@@ -169,5 +169,3 @@ Then open http://localhost:5173
 
 ---
 
-*This project was originally built on Replit and has been fully patched for local development.*
-#
